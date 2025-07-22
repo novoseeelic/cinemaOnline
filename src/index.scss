@@ -1,0 +1,79 @@
+// 1. Сброс стандартных стилей (reset)
+*, *::before, *::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  
+  html {
+    font-size: 16px;
+    scroll-behavior: smooth;
+  }
+  
+  body {
+    font-family: 'Roboto', 'Arial', sans-serif;
+    line-height: 1.6;
+    color: #1a1a1a;
+    background-color: #f9f9f9;
+    min-height: 100vh;
+  }
+  
+  a {
+    text-decoration: none;
+    color: inherit;
+  }
+  
+  ul, ol {
+    list-style: none;
+  }
+  
+  img {
+    max-width: 100%;
+    height: auto;
+    vertical-align: middle;
+  }
+  
+  button {
+    cursor: pointer;
+    background: none;
+    border: none;
+    padding: 0;
+    font-family: inherit;
+  }
+  
+  input, button, select, textarea {
+    font: inherit;
+  }
+  
+  // // 2. Переменные (цвета, брейкпоинты, тени)
+  // @import './styles/variables';
+  
+  // // 3. Глобальные миксины
+  // @import './styles/mixins';
+  
+  // // 4. Базовые стили
+  // @import './styles/base';
+  
+  // 5. UI-компоненты (кнопки, инпуты, модальные окна)
+  @import './components/shared/Button.scss';
+  @import './components/shared/Input.scss';
+  @import './components/shared/Modal.scss';
+  @import './components/shared/Modal.scss';
+  
+  // 6. Макет страницы
+  @import './components/layout/Header.scss';
+  @import './components/layout/Footer.scss';
+  
+  // 7. Компоненты фильмов и жанров
+  @import './components/movies/MovieCard.scss';
+  @import './components/genres/GenreCard.scss';
+  @import './components/movies/TrailerModal.scss';
+  @import './components/movies/RandomMovie.scss';
+  
+  // 8. Страницы (для глобальных стилей страниц)
+  @import './pages/Home/HomePage.scss';
+  @import './pages/Genres/GenresPage.scss';
+  @import './pages/Genre/GenrePage.scss';
+  @import './pages/Movie/MoviePage.scss';
+  @import './pages/Account/AccountPage.scss';
+  @import './pages/NotFound/NotFoundPage.scss';
