@@ -1,91 +1,99 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect } from 'react'
 import { useParams } from 'react-router-dom'
-import { useAppDispatch, useAppSelector } from '@/store/store'
-import { fetchMovieById } from '@/store/slices/movieSlice'
-import { addToFavorites, removeFromFavorites } from '@/store/slices/favoriteSlice'
-import { openAuthModal } from '@/store/slices/authSlice'
-import { fetchMovieById as apiFetchMovie } from '@/services/movieApi'
+import { useAppSelector, useAppDispatch } from '@/store/store'
+import { fetchMovieByIdSuccess, fetchMovieByIdStart, fetchFailure } from '@/store/slices/movieSlice'
+import { fetchMovieById } from '@/services/movieApi'
 import { Button } from '@/components/shared/Button'
-import { TrailerModal } from '@/components/movies/TrailerModal'
-import { Loader } from '@/components/shared/Loader'
 import './MoviePage.scss'
+import { Header } from '@/components/layout/Header'
+import { Footer } from '@/components/layout/Footer'
 
 export const MoviePage: React.FC = () => {
-  const { id } = useParams<{ id: string }>()
   const dispatch = useAppDispatch()
+  const { id } = useParams<{ id: string }>()
   const { currentMovie, loading } = useAppSelector((state) => state.movies)
   const { isAuthenticated } = useAppSelector((state) => state.auth)
-  const { list: favorites } = useAppSelector((state) => state.favorites)
-
-  console.log(currentMovie)
-
-  const [isModalOpen, setIsModalOpen] = useState(false)
 
   useEffect(() => {
-    if (!id) return
     const loadMovie = async () => {
-      try {
-        const movie = await apiFetchMovie(id)
-        dispatch(fetchMovieById(movie))
-      } catch (error) {
-        console.error('Ошибка загрузки фильма:', error)
+      if (id) {
+        dispatch(fetchMovieByIdStart())
+        try {
+          const movie = await fetchMovieById(id)
+          dispatch(fetchMovieByIdSuccess(movie))
+        } catch (error) {
+          console.error('Ошибка загрузки фильма:', error)
+          dispatch(fetchFailure('Не удалось загрузить фильм'))
+        }
       }
     }
-    loadMovie()
+  
+    loadMovie() // вызываем асинхронную функцию
   }, [id, dispatch])
 
-  const isFavorite = favorites.some((movie) => movie.id === id)
-
-  const handleToggleFavorite = () => {
-    if (!isAuthenticated) {
-      dispatch(openAuthModal())
-      return
-    }
-    if (isFavorite) {
-      dispatch(removeFromFavorites({ id }))
-    } else {
-      dispatch(addToFavorites(currentMovie))
-    }
-  }
-
-  const handleOpenTrailer = () => {
-    setIsModalOpen(true)
-  }
-
-  const handleCloseModal = () => {
-    setIsModalOpen(false)
-  }
-
-  if (loading || !currentMovie) {
-    return <Loader />
-  }
-
   return (
-    <div className="movie-page">
-      <div className="movie-details">
-        <img src={currentMovie.posterUrl} alt={currentMovie.title} className="movie-details__poster" />
-        
-        <div className="movie-details__info">
-          <h1 className="movie-details__title">{currentMovie.title}</h1>
-          <p className="movie-details__year">Год: {currentMovie.relaseYear}</p>
-          <p className="movie-details__rating">Рейтинг: ⭐ {currentMovie.tmdbRating}</p>
-          <p className="movie-details__description">{currentMovie.plot}</p>
+    <>
+      <Header />
+      <section className="movie-page">
+        {loading ? (
+          <p>Загружаем фильм...</p>
+        ) : currentMovie ? (
+          <div className="movie-page__container">
+            {/* Информация о фильме */}
+            <div className="movie-page__info">
+              <div className="movie-page__meta">
+                <span className="movie-page__rating">⭐️ {currentMovie.tmdbRating}</span>
+                <span>{currentMovie.relaseYear}</span>
+                <span>{currentMovie.genres}</span>
+                <span>{currentMovie.runtime} мин</span>
+              </div>
+              <h2 className="movie-page__title">{currentMovie.title}</h2>
+              <p className="movie-page__description">{currentMovie.plot}</p>
+              <div className="movie-page__buttons">
+                <Button variant="primary">Трейлер</Button>
+                {/* <Button variant="secondary">О фильме</Button> */}
+                <Button variant="icon" icon="heart">
+                  {isAuthenticated ? 'Добавить в избранное' : 'Войти'}
+                </Button>
+                {/* <Button variant="icon" icon="share">
+                  Поделиться
+                </Button> */}
+              </div>
 
-          <div className="movie-details__actions">
-            <Button onClick={handleOpenTrailer} variant="secondary">
-              Посмотреть трейлер
-            </Button>
-            <Button onClick={handleToggleFavorite}>
-              {isFavorite ? 'Удалить из избранного' : 'Добавить в избранное'}
-            </Button>
+              {/* Раздел "О фильме" */}
+              <div className="movie-page__details">
+                <h3 className="movie-page__details-title">О фильме</h3>
+                <dl className="movie-page__details-list">
+                  <dt>Язык оригинала:</dt>
+                  <dd>{currentMovie.language}</dd>
+                  <dt>Бюджет:</dt>
+                  <dd>{currentMovie.budget} руб.</dd>
+                  <dt>Выручка:</dt>
+                  <dd>{currentMovie.revenue} руб.</dd>
+                  <dt>Режиссёр:</dt>
+                  <dd>{currentMovie.director}</dd>
+                  <dt>Продолжительность:</dt>
+                  <dd>{currentMovie.runtime} мин.</dd>
+                  <dt>Награды:</dt>
+                  <dd>{currentMovie.awardsSummary}</dd>
+                </dl>
+              </div>
+            </div>
+
+            {/* Обложка фильма */}
+            <div className="movie-page__poster-wrapper">
+              <img
+                src={currentMovie.posterUrl}
+                alt={currentMovie.title}
+                className="movie-page__poster"
+              />
+            </div>
           </div>
-        </div>
-      </div>
-
-      {isModalOpen && (
-        <TrailerModal trailerUrl={currentMovie.trailerUrl} onClose={handleCloseModal} />
-      )}
-    </div>
+        ) : (
+          <p>Фильм не найден. Попробуйте снова.</p>
+        )}
+      </section>
+      <Footer />
+    </>
   )
 }
-

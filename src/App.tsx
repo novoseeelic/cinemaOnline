@@ -14,7 +14,7 @@ function App() {
       <Routes>
         <Route path="/" element={<HomePage />} />
         <Route path="/genres" element={<GenresPage />} />
-        <Route path="/genres/:id" element={<GenrePage />} />
+        <Route path="/genres/:genreName" element={<GenrePage />} />
         <Route path="/movies/:id" element={<MoviePage />} />
         <Route path="/account" element={
           <ProtectedRoute>

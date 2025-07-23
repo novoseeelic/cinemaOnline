@@ -24,6 +24,14 @@ export const movieSlice = createSlice({
     fetchMovieById: (state, action: PayloadAction<Movie>) => {
       state.currentMovie = action.payload
     },
+    fetchMovieByIdStart: (state) => {
+      state.loading = true
+      state.error = null
+    },
+    fetchMovieByIdSuccess: (state, action: PayloadAction<Movie>) => {
+      state.currentMovie = action.payload
+      state.loading = false
+    },
     fetchRandomMovieStart: (state) => {
       state.loading = true
       state.error = null
@@ -45,6 +53,8 @@ export const movieSlice = createSlice({
 // Экспортируем экшены и редюсер
 export const { 
   fetchMovieById, 
+  fetchMovieByIdStart,
+  fetchMovieByIdSuccess,
   fetchRandomMovieStart, 
   fetchRandomMovieSuccess, 
   fetchTopMoviesSuccess, 

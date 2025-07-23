@@ -9,12 +9,13 @@ interface GenreCardProps {
 }
 
 export const GenreCard: React.FC<GenreCardProps> = ({ id, name, image }) => {
+  // Преобразуем название в URL-friendly slug
+  const slug = encodeURIComponent(name.toLowerCase().replace(/\s+/g, '-'))
+
   return (
-    <div className="genre-card">
-      <Link to={`/genres/${id}`}>
-        <img src={image} alt={name} className="genre-card__image" />
-        <h3 className="genre-card__title">{name}</h3>
-      </Link>
-    </div>
+    <Link to={`/genres/${slug}`} className="genre-card">
+      <img src={image} alt={name} className="genre-card__image" />
+      <h3 className="genre-card__title">{name}</h3>
+    </Link>
   )
 }

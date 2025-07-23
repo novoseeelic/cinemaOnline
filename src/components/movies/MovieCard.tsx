@@ -1,19 +1,21 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
 import './MovieCard.scss'
-import { Movie } from '@/types/movie.types'
+import { Link } from 'react-router-dom'
 
 interface MovieCardProps {
-  movie: Movie
-  position: number
+  movie: {
+    id: string
+    posterUrl: string
+    title: string
+  }
 }
 
-export const MovieCard: React.FC<MovieCardProps> = ({ movie, position }) => {
+export const MovieCard: React.FC<MovieCardProps> = ({ movie }) => {
   return (
-    <div className="movie-card">
-      <span className="movie-card__position">{position}</span>
-      <img src={movie.posterUrl} alt={movie.title} />
-      <h3>{movie.title}</h3>
-    </div>
+    <Link to={`/movies/${movie.id}`} className="movie-card">
+      <div className="movie-card">
+        <img src={movie.posterUrl} alt={movie.title} className="movie-card__poster" />
+      </div>
+    </Link>
   )
 }

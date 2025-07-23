@@ -8,13 +8,13 @@ import { RandomMovie } from '@/components/movies/RandomMovie'
 import './HomePage.scss'
 import { Loader } from '@/components/shared/Loader'
 import { Button } from '@/components/shared/Button'
+import { Header } from '@/components/layout/Header'
+import { Footer } from '@/components/layout/Footer'
 
 export const HomePage: React.FC = () => {
   const dispatch = useAppDispatch()
   const { randomMovie, topMovies, loading } = useAppSelector((state) => state.movies)
   const { isAuthenticated } = useAppSelector((state) => state.auth)
-
-  
 
   useEffect(() => {    
     const loadTopMovies = async () => {
@@ -32,52 +32,25 @@ export const HomePage: React.FC = () => {
   }, [dispatch])
 
   return (
-    <main className="home-page">
-      {/* Шапка */}
-      <header className="home-page__header">
-        <div className="home-page__logo">Маруся</div>
-        <nav className="home-page__nav">
-          <Button variant="text" onClick={() => console.log('Главная')}>
-            Главная
-          </Button>
-          <Button variant="text" onClick={() => console.log('Жанры')}>
-            Жанры
-          </Button>
-          <Button variant="text" onClick={() => console.log('Войти')}>
-            Войти
-          </Button>
-        </nav>
-        <input type="text" placeholder="Поиск..." />
-      </header>
+    <>
+      <Header />
+      <main className="home-page">
+        {/* Случайный фильм */}
+        <section className="home-page__random-movie">
+          <RandomMovie />
+        </section>
 
-      {/* Случайный фильм */}
-      <section className="home-page__random-movie">
-        {loading ? (
-          <Loader />
-        ) : randomMovie ? (
-          <div className="random-movie">
-            <img src={randomMovie.posterUrl} alt={randomMovie.title} />
-            <div className="random-movie__info">
-              <h2>{randomMovie.title}</h2>
-              <p>{randomMovie.plot}</p>
-              <Button onClick={() => console.log('Посмотреть трейлер')}>Трейлер</Button>
-            </div>
+        {/* Топ-10 фильмов */}
+        <section className="home-page__top-movies">
+          <h2>Топ 10 фильмов</h2>
+          <div className="movie-cards">
+            {topMovies.map((movie, index) => (
+              <MovieCard key={movie.id} movie={movie} />
+            ))}
           </div>
-        ) : (
-          <p>Загрузка фильма...</p>
-        )}
-      </section>
-
-      {/* Топ-10 фильмов */}
-      <section className="home-page__top-movies">
-        <h2>Топ 10 фильмов</h2>
-        <div className="movie-cards">
-          {topMovies.map((movie, index) => (
-            <MovieCard key={movie.id} movie={movie} position={index + 1} />
-          ))}
-        </div>
-      </section>
-    </main>
+        </section>
+      </main>
+      <Footer />
+    </>
   )
-
 }

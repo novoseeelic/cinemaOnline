@@ -27,5 +27,3 @@
 
 1. Клонируйте репозиторий:
 
-```bash
-git clone https://gitlab.skillbox.ru/your-username/cinema-app.git 

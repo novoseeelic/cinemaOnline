@@ -8,4 +8,10 @@ export type Movie = {
   trailerUrl: string
   genres: string[]
   tmdbRating:	number
+  runtime: number
+  language:	string
+  budget:	string
+  revenue: string
+  director: string
+  awardsSummary: string
 }

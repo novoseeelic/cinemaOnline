@@ -1,36 +1,60 @@
-import { createSlice } from '@reduxjs/toolkit'
-import { Genre } from '@/types/genre.types'
+// src/store/slices/genreSlice.ts
+
+import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 
 interface GenreState {
-  genres: Genre[]
+  genres: { id: string; name: string; image: string }[]
+  movies: any[] // Здесь должен быть тип Movie
   loading: boolean
-  error: string | null
+  hasMore: boolean
+  currentPage: number
 }
 
 const initialState: GenreState = {
   genres: [],
+  movies: [],
   loading: false,
-  error: null
+  hasMore: true,
+  currentPage: 1
 }
 
-const genreSlice = createSlice({
+export const genreSlice = createSlice({
   name: 'genres',
   initialState,
   reducers: {
     fetchGenresStart: (state) => {
       state.loading = true
-      state.error = null
     },
     fetchGenresSuccess: (state, action) => {
       state.genres = action.payload
       state.loading = false
     },
-    fetchGenresFailure: (state, action) => {
+    fetchMoviesByGenreStart: (state) => {
+      state.loading = true
+    },
+    fetchMoviesByGenreSuccess: (state, action: PayloadAction<{ movies: any[]; hasMore: boolean }>) => {
+      state.movies = state.currentPage === 1 ? action.payload.movies : [...state.movies, ...action.payload.movies]
+      state.hasMore = action.payload.hasMore
       state.loading = false
-      state.error = action.payload
+    },
+    setCurrentPage: (state, action: PayloadAction<number>) => {
+      state.currentPage = action.payload
+    },
+    clearGenreMovies: (state) => {
+      state.movies = []
+      state.currentPage = 1
+      state.hasMore = true
     }
   }
 })
 
-export const { fetchGenresStart, fetchGenresSuccess, fetchGenresFailure } = genreSlice.actions
+export const {
+  fetchGenresStart,
+  fetchGenresSuccess,
+  fetchMoviesByGenreStart,
+  fetchMoviesByGenreSuccess,
+  setCurrentPage,
+  clearGenreMovies
+} = genreSlice.actions
+
 export default genreSlice.reducer
