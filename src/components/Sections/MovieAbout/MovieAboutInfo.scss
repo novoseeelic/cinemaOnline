@@ -1,0 +1,47 @@
+.movie-about-info {
+  color: var(--color-primary);
+  display: flex;
+  gap: 8px;
+
+  @include vp-767 {
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  &__param-wrapper {
+    width: 320px;
+    display: flex;
+    gap: 8px;
+  }
+
+  &__param {
+    font-size: 18px;
+    line-height: 24px;
+
+    @include vp-767 {
+      color: var(--color-disabled);
+      font-size: 14px;
+      line-height: 20px;
+    }
+  }
+
+  &__border {
+    flex-grow: 1;
+    border-bottom: 1px dashed var(--color-disabled);
+    height: 18px;
+
+    @include vp-767 {
+      display: none;
+    }
+  }
+
+  &__value {
+    font-size: 18px;
+    line-height: 24px;
+  }
+
+  .skeleton {
+    width: 100%;
+    max-width: 420px;
+  }
+}

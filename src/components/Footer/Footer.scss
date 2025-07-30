@@ -1,0 +1,12 @@
+.footer {
+  &__wrapper {
+    padding: 40px 0;
+    display: flex;
+    justify-content: flex-end;
+
+    @include vp-767 {
+      padding: 24px 0;
+      justify-content: flex-start;
+    }
+  }
+}

@@ -1,0 +1,123 @@
+.movie-section {
+  $root: &;
+
+  &__wrapper {
+    padding: 32px 0 0;
+    display: grid;
+    grid-template-columns: 580fr 680fr;
+    align-items: center;
+    gap: 20px;
+
+    @include vp-1439 {
+      display: flex;
+      flex-direction: column-reverse;
+      gap: 24px;
+      padding-bottom: 24px;
+    }
+
+    @include vp-767 {
+      padding-top: 12px;
+    }
+
+    @include vp-375 {
+      padding-top: 0;
+    }
+  }
+
+  &__content {
+    display: flex;
+    flex-direction: column;
+    gap: 60px;
+
+    @include vp-1439 {
+      align-self: stretch;
+      gap: 48px;
+    }
+
+    @include vp-767 {
+      gap: 32px;
+    }
+  }
+
+  &__info {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+
+    @include vp-767 {
+      gap: 13px;
+    }
+  }
+
+  &__info-top {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    color: var(--color-secondary);
+    font-size: 18px;
+    line-height: 24px;
+    text-transform: lowercase;
+
+    @include vp-767 {
+      font-size: 14px;
+      line-height: 20px;
+    }
+  }
+
+  &__plot {
+    margin: 0;
+    color: var(--color-secondary);
+    font-size: 24px;
+    line-height: 32px;
+
+    @include vp-767 {
+      font-size: 18px;
+      line-height: 24px;
+    }
+  }
+
+  &__buttons {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px;
+
+    @include vp-767 {
+      display: grid;
+      grid-template-columns: 1fr auto;
+    }
+  }
+
+  &__img {
+    border-radius: 16px;
+    aspect-ratio: 680 / 552;
+    width: 100%;
+    max-width: 700px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--color-bg-secondary);
+
+    @include vp-1439 {
+      aspect-ratio: 338 / 234;
+    }
+  }
+
+  &--random {
+    #{$root}__buttons {
+      @include vp-767 {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 16px;
+      }
+
+      @media (max-width: 600px) {
+        display: grid;
+        grid-template-columns: 1fr auto auto;
+
+        .button:first-child {
+          grid-column: 1 / -1;
+        }
+      }
+    }
+  }
+}

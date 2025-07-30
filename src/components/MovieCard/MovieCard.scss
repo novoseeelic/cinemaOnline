@@ -1,0 +1,97 @@
+.movie-card {
+  display: block;
+  position: relative;
+  $root: &;
+
+  &__link:hover,
+  &__link:focus-visible {
+    outline: none;
+
+    #{$root}__img {
+      box-shadow: 0px 0px 80px 0px var(--color-active);
+      border-color: var(--color-active);
+      transform: scale(1.05);
+
+      @include vp-375 {
+        transform: scale(1);
+      }
+    }
+  }
+
+  &__link:hover ~ #{$root}__pos,
+  &__link:focus-visible ~ #{$root}__pos {
+    transform: translate(-5px, -7px) scale(1.05);
+
+      @include vp-375 {
+        transform: translate(0) scale(1);
+      }
+  }
+
+  &__link:hover ~ #{$root}__remove-btn,
+  &__link:focus-visible ~ #{$root}__remove-btn {
+    transform: translate(5px, -7px) scale(1.05);
+
+      @include vp-375 {
+        transform: translate(0) scale(1);
+      }
+  }
+
+  &__img {
+    display: block;
+    max-width: 224px;
+    width: 100%;
+    aspect-ratio: 2 / 3;
+    border-radius: 16px;
+    box-shadow: 0px 0px 80px 0px rgba(255, 255, 255, 0.33);
+    border: 1px solid rgba(255, 255, 255, 0.25);
+    background-color: var(--color-bg-secondary);
+    transition: box-shadow var(--transition-200),
+      border-color var(--transition-200),
+      transform var(--transition-200);
+
+    @include vp-375 {
+      max-width: unset;
+    }
+
+    &--loading {
+      border: transparent;
+      box-shadow: none;
+    }
+  }
+
+  &__text {
+    align-content: center;
+    text-align: center;
+    font-size: 24px;
+    line-height: 32px;
+  }
+
+  &__pos {
+    display: block;
+    position: absolute;
+    top: -12px;
+    left: -12px;
+    border-radius: 50px;
+    background-color: var(--color-white);
+    color: var(--color-brand-active);
+    padding: 8px 24px;
+    font-weight: 700;
+    font-size: 24px;
+    line-height: 32px;
+    user-select: none;
+    transition: transform var(--transition-200);
+    pointer-events: none;
+  }
+
+  &__remove-btn {
+    position: absolute;
+    right: -20px;
+    top: -20px;
+    width: 40px;
+    height: 40px;
+    background-color: var(--color-white);
+    color: var(--color-black);
+    border-radius: 50%;
+    transition: transform var(--transition-200);
+  }
+}

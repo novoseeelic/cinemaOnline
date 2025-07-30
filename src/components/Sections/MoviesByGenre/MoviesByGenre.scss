@@ -1,0 +1,52 @@
+.movies-by-genre {
+  &__wrapper {
+    padding: 64px 0 160px;
+    display: flex;
+    flex-direction: column;
+    gap: 64px;
+
+    @include vp-1439 {
+      gap: 40px;
+      padding-bottom: 60px;
+    }
+  
+    @include vp-767 {
+      padding: 24px 0 40px;
+    }
+  }
+
+  &__back-link {
+    transition: color var(--transition-200);
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    outline: none;
+
+    @include vp-767 {
+      gap: 8px;
+    }
+
+    svg {
+      width: 40px;
+      height: 40px;
+
+      @include vp-767 {
+        width: 32px;
+        height: 32px;
+      }
+    }
+
+    &:hover,
+    &:focus-visible {
+      color: var(--color-active);
+    }
+  }
+
+  &__next-btn {
+    align-self: center;
+
+    @include vp-767 {
+      width: 100%;
+    }
+  }
+}

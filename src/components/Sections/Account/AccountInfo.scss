@@ -1,0 +1,57 @@
+.my-account-info {
+  display: flex;
+  gap: 16px;
+
+  &__icon {
+    width: 60px;
+    height: 60px;
+    min-width: 60px;
+    min-height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    border-radius: 50%;
+    background-color: var(--color-disabled);
+    font-size: 24px;
+    line-height: 32px;
+    font-weight: 700;
+    user-select: none;
+
+    @include vp-767 {
+      width: 48px;
+      height: 48px;
+      min-height: 48px;
+      min-width: 48px;
+    }
+  }
+
+  &__content {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  &__title {
+    font-size: 18px;
+    line-height: 24px;
+    color: var(--color-primary);
+
+    @include vp-767 {
+      font-size: 14px;
+      line-height: 20px;
+      color: var(--color-disabled);
+    }
+  }
+
+  &__text {
+    font-size: 24px;
+    line-height: 32px;
+    color: var(--color-primary);
+
+    @include vp-767 {
+      font-size: 18px;
+      line-height: 24px;
+    }
+  }
+}

@@ -1,0 +1,87 @@
+.input {
+  display: block;
+  position: relative;
+  width: 100%;
+  $root: &;
+
+  &__field {
+    width: 100%;
+    padding: 15px 15px 15px 51px;
+    background-color: var(--color-white);
+    color: var(--color-black);
+    font-family: var(--ff-main);
+    font-size: 18px;
+    line-height: 24px;
+    border: 1px solid var(--color-placeholder);
+    border-radius: 8px;
+    outline: none;
+    transition: border-color var(--transition-200);
+
+    &:hover:not([disabled]),
+    &:focus-visible:not([disabled]) {
+      border-color: var(--color-active);
+    }
+
+    &:hover:not([disabled]) ~ #{$root}__icon,
+    &:focus-visible:not([disabled]) ~ #{$root}__icon {
+      color: var(--color-active);
+    }
+
+    &::placeholder {
+      color: var(--color-placeholder);
+    }
+
+    &:disabled {
+      background-color: var(--color-disabled);
+    }
+  }
+
+  &__icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    left: 16px;
+    top: 16px;
+    width: 24px;
+    height: 24px;
+    pointer-events: none;
+    color: var(--color-placeholder);
+    transition: color var(--transition-200);
+  }
+
+  &__error {
+    display: block;
+    color: var(--color-error);
+    font-size: 16px;
+    line-height: 22px;
+  }
+
+  &--dark #{$root}__field {
+    background-color: var(--color-bg-secondary);
+    border-color: var(--color-bg-secondary);
+    color: var(--color-primary);
+
+    &::placeholder {
+      color: var(--color-disabled);
+    }
+
+    &:disabled {
+      background-color: var(--color-bg-secondary-disabled);
+    }
+  }
+
+  &--dark #{$root}__icon {
+    color: var(--color-disabled);
+  }
+
+  &--error #{$root}__field {
+    border-color: var(--color-error);
+    margin-bottom: 5px;
+  }
+
+  &--error #{$root}__icon {
+    color: var(--color-error);
+  }
+  
+}

@@ -1,0 +1,33 @@
+.socials {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  gap: 24px;
+
+  &__link {
+    color: var(--color-white-80);
+    transition: color var(--transition-200);
+    outline: none;
+
+    &:hover,
+    &:focus-visible {
+      color: var(--color-active);
+    }
+  }
+
+  svg {
+    width: 36px;
+    height: 36px;
+
+    @include vp-767 {
+      width: 30px;
+      height: 30px;
+    }
+
+    @include vp-375 {
+      width: 24px;
+      height: 24px;
+    }
+  }
+}

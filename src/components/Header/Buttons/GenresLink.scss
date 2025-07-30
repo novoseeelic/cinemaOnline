@@ -1,0 +1,29 @@
+.genres-link {
+  display: none;
+  line-height: 0;
+  color: var(--color-primary);
+  outline: none;
+  transition: color var(--transition-200);
+
+  &:hover,
+  &:focus-visible {
+    color: var(--color-active);
+  }
+
+  @media (max-width: 1200px) {
+    display: block;
+  } 
+
+  svg {
+    @include vp-767 {
+      width: 28px;
+      height: 28px;
+    }
+
+    @include vp-375 {
+      width: 24px;
+      height: 24px;
+    }
+  }
+  
+}

@@ -1,0 +1,100 @@
+.search {
+  display: block;
+  position: relative;
+  width: 100%;
+  $root: &;
+
+  @include vp-767 {
+    display: none;
+  }
+
+  &__field {
+    width: 100%;
+    padding: 11px 15px 11px 51px;
+    background-color: var(--color-bg-secondary);
+    color: var(--color-primary);
+    font-family: var(--ff-main);
+    font-size: 18px;
+    line-height: 24px;
+    border: 1px solid var(--color-bg-secondary);
+    border-radius: 8px;
+    outline: none;
+    transition: border-color var(--transition-200);
+
+    &:hover,
+    &:focus-visible {
+      border-color: var(--color-active);
+    }
+
+    &:hover ~ #{$root}__icon,
+    &:focus-visible ~ #{$root}__icon {
+      color: var(--color-active);
+    }
+
+    &::placeholder {
+      color: var(--color-disabled);
+    }
+  }
+
+  &__icon {
+    position: absolute;
+    left: 16px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 24px;
+    height: 24px;
+    pointer-events: none;
+    color: var(--color-disabled);
+    transition: color var(--transition-200);
+  }
+
+  &__reset-btn {
+    position: absolute;
+    top: 50%;
+    right: 16px;
+    transform: translateY(-50%);
+    width: 24px;
+    height: 24px;
+    color: var(--color-disabled);
+    transition: color var(--transition-200);
+  }
+
+  &--modal {
+    display: block;
+    position: fixed;
+    top: 0;
+    left: 0;
+    padding: 16px 20px 100vh;
+    z-index: 10;
+    background-color: var(--color-black-50);
+
+    #{$root}__field {
+      padding: 15px 15px 15px 51px;
+
+      &:hover,
+      &:focus-visible {
+        border-color: var(--color-bg-secondary);
+
+        #{$root}__icon {
+          color: var(--color-disabled);
+        }
+      }
+
+      &:hover ~ #{$root}__icon,
+      &:focus-visible ~ #{$root}__icon {
+        color: var(--color-disabled);
+      }
+    }
+
+    #{$root}__icon {
+      top: 44px;
+      left: 36px;
+    }
+
+    #{$root}__reset-btn {
+      top: 44px;
+      right: 36px;
+      color: var(--color-primary);
+    }
+  }
+}

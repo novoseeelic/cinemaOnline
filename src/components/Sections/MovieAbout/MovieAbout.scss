@@ -1,0 +1,28 @@
+.movie-about {
+  &__wrapper {
+    padding: 40px 0 120px;
+    display: grid;
+    gap: 64px;
+
+    @include vp-1439 {
+      gap: 40px;
+      padding-bottom: 60px;
+    }
+
+    @include vp-767 {
+      padding: 32px 0;
+    }
+  }
+
+  &__list {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    gap: 24px;
+
+    @include vp-767 {
+      gap: 12px;
+    }
+  }
+}

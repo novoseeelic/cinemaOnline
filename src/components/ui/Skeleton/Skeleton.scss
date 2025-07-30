@@ -1,0 +1,22 @@
+.skeleton {
+  border-radius: 16px;
+  background-color: var(--color-bg-primary-disabled);
+  height: calc(24px * var(--lines-count));
+  animation: skeletonBlink 1s ease-out infinite;
+
+  @include vp-767 {
+    height: calc(18px * var(--lines-count));
+  }
+
+  @keyframes skeletonBlink {
+    0% {
+      opacity: 100%;
+    }
+    50% {
+      opacity: 60%;
+    }
+    100% {
+      opacity: 100%;
+    }
+  }
+}

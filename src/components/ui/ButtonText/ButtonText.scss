@@ -1,0 +1,24 @@
+.button-text {
+  display: block;
+  padding: 0;
+  text-align: center;
+  font-family: var(--ff-main);
+  font-size: 18px;
+  line-height: 24px;
+  font-weight: 700;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  background-color: transparent;
+  color: var(--color-primary);
+  transition: color var(--transition-200);
+  
+  &:hover,
+  &:focus-visible {
+    color: var(--color-active);
+  }
+
+  &--dark {
+    color: var(--color-black);
+  }
+}

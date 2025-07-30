@@ -1,0 +1,14 @@
+.logo {
+  display: flex;
+  align-items: center;
+  outline: none;
+
+  img {
+    width: auto;
+    height: 32px;
+
+    @include vp-375 {
+      height: 18px;
+    }
+  }
+}

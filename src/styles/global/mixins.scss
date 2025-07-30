@@ -1,0 +1,17 @@
+@mixin vp-1439 {
+  @media (max-width: 1439px) {
+    @content;
+  }
+}
+
+@mixin vp-767 {
+  @media (max-width: 767px) {
+    @content;
+  }
+}
+
+@mixin vp-375 {
+  @media (max-width: 375px) {
+    @content;
+  }
+}

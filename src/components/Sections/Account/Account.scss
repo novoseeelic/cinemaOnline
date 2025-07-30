@@ -1,0 +1,61 @@
+.my-account {
+  &__wrapper {
+    padding: 64px 0 160px;
+    display: grid;
+    gap: 64px;
+
+    @include vp-1439 {
+      gap: 40px;
+      padding-bottom: 60px;
+    }
+  
+    @include vp-767 {
+      padding: 24px 0 40px;
+    }
+  }
+
+  &__nav-list {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 64px;
+
+    @include vp-767 {
+      gap: 24px;
+    }
+  }
+
+  &__nav-btn {
+    border: none;
+    border-bottom: 1px solid transparent;
+    background-color: unset;
+    padding: 8px 0;
+    display: flex;
+    gap: 8px;
+    outline: none;
+    cursor: pointer;
+    transition: color var(--transition-200);
+    font-family: var(--ff-main);
+    font-size: 24px;
+    line-height: 32px;
+    color: var(--color-primary);
+    position: relative;
+    z-index: 1;
+
+    &:hover,
+    &:focus-visible {
+      color: var(--color-active);
+    }
+
+    @media (max-width: 374px) {
+      font-size: 18px;
+      line-height: 24px;
+    }
+
+    &--active {
+      border-color: var(--color-heliotrope);
+    }
+  }
+}

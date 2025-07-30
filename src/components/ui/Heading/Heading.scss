@@ -1,0 +1,43 @@
+.heading {
+  margin: 0;
+  color: var(--color-primary);
+
+  &--1 {
+    font-size: 48px;
+    line-height: 56px;
+
+    @include vp-767 {
+      font-size: 24px;
+      line-height: 32px;
+    }
+  }
+
+  &--2 {
+    font-size: 40px;
+    line-height: 48px;
+
+    @include vp-767 {
+      font-size: 24px;
+      line-height: 32px;
+    }
+  }
+
+  &--3 {
+    font-size: 32px;
+    line-height: 40px;
+
+    @include vp-767 {
+      font-size: 24px;
+      line-height: 32px;
+    }
+  }
+
+  &--4 {
+    font-size: 24px;
+    line-height: 32px;
+  }
+
+  &--dark {
+    color: var(--color-black);
+  }
+}
